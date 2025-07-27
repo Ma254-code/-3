@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wenn ich an dich denke...</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .fade-in {
+      animation: fadeIn 2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-pink-100 via-rose-200 to-pink-300 text-gray-900">
+  <script>
+    const users = [
+      { username: "Marlon", password: "lotta" },
+      { username: "admin", password: "admin" }
+    ];
+
+    function login(event) {
+      event.preventDefault();
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      const match = users.find(u => u.username === user && u.password === pass);
+      if (match) {
+        document.getElementById('login').classList.add('hidden');
+        document.getElementById('main').classList.remove('hidden');
+      } else {
+        alert('Falscher Benutzername oder Passwort');
+      }
+    }
+  </script>
+
+  <!-- Login Form -->
+  <section id="login" class="min-h-screen flex flex-col justify-center items-center px-6 text-center">
+    <h1 class="text-4xl font-bold mb-6">💖 Willkommen</h1>
+    <form onsubmit="login(event)" class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-sm">
+      <input id="username" type="text" placeholder="Benutzername" class="w-full mb-4 px-4 py-2 border rounded-xl" required />
+      <input id="password" type="password" placeholder="Passwort" class="w-full mb-4 px-4 py-2 border rounded-xl" required />
+      <button type="submit" class="w-full bg-rose-500 hover:bg-rose-400 text-white px-4 py-2 rounded-xl">Einloggen</button>
+    </form>
+  </section>
+
+  <!-- Main Content -->
+  <section id="main" class="hidden min-h-screen flex flex-col items-center justify-center px-6 fade-in">
+    <h2 class="text-3xl md:text-5xl font-bold text-center mb-4">Wenn ich an dich denke...</h2>
+    <p class="text-lg md:text-xl text-center max-w-2xl mb-8">...öffnet sich diese kleine Welt nur für mich. Hier bewahre ich Gedanken, Gefühle und Träume.</p>
+
+    <div class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-md text-gray-800">
+      <h3 class="text-xl font-semibold mb-2">💬 Zufälliger Gedanke</h3>
+      <p id="quote" class="italic text-gray-600">Lade Gedanken...</p>
+    </div>
+  </section>
+
+  <script>
+    const quotes = [
+      "Dein Lächeln ist mein Lieblingsmoment.",
+      "Jeder Gedanke an dich fühlt sich wie Frühling an.",
+      "Wenn du wüsstest, wie oft ich an dich denke...",
+      "Du bist mein geheimer Lieblingsmensch.",
+      "Nur du kannst diesen Ort in mir berühren."
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      document.getElementById('quote').textContent = randomQuote;
+    });
+  </script>
+
+</body>
+</html>
